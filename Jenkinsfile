@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+    DOCKERHUB_CREDENTIALS = credentials('dockerhub_password')
+  }
     stages {
         stage('Build Application') {
             steps {
@@ -13,13 +16,25 @@ pipeline {
             }
         }
 
+        stage('Login') {
+      steps {
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+      }
+    }
+
         stage('Create Tomcat Docker Image'){
             steps {
                 sh "pwd"
                 sh "ls -a"
-                sh "docker build . -t tomcatsamplewebapp:${env.BUILD_ID}"
+                sh "docker build . -t himimage:${env.BUILD_ID}"
             }
         }
+
+        stage('Push') {
+      steps {
+        sh 'docker push himimage:${env.BUILD_ID}'
+      }
+    }
 
     }
 }
