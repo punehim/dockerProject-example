@@ -41,6 +41,13 @@ pipeline {
         }
                   
           }
+        stage('Run Docker container on Jenkins Server') {
+             
+            steps {
+                sh "docker run -d -p 4030:8080 himanshudabhade/jenkinsmade"
+ 
+            }
+        }  
         }
 
     }
