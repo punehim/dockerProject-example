@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-    DOCKERHUB_CREDENTIALS = credentials('dockerhub_password')
+    DOCKERHUB_CREDENTIALS = credentials('originalDockerhubpassword')
   }
     stages {
         stage('Build Application') {
@@ -26,13 +26,13 @@ pipeline {
             steps {
                 sh "pwd"
                 sh "ls -a"
-                sh "docker build . -t himimage:latest"
+                sh "docker build . -t himimage1:latest"
             }
         }
 
         stage('Push') {
       steps {
-        sh 'docker push himimage:latest'
+        sh 'docker push himimage1:latest'
       }
     }
 
