@@ -26,13 +26,13 @@ pipeline {
             steps {
                 sh "pwd"
                 sh "ls -a"
-                sh "docker build . -t himimage:${env.BUILD_ID}"
+                sh "docker build . -t himimage:latest"
             }
         }
 
         stage('Push') {
       steps {
-        sh 'docker push himimage:${env.BUILD_ID}'
+        sh 'docker push himimage:latest'
       }
     }
 
