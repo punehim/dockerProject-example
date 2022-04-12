@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-    DOCKERHUB_CREDENTIALS = credentials('originalDockerhubpassword')
+    DOCKERHUB_CREDENTIALS = credentials('dockerhub_password')
   }
     stages {
         stage('Build Application') {
@@ -17,7 +17,7 @@ pipeline {
         }
 
         stage('Login') {
-      steps {
+            steps {
         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
       }
     }
@@ -26,15 +26,22 @@ pipeline {
             steps {
                 sh "pwd"
                 sh "ls -a"
-                sh "docker build . -t himimage1:latest"
+                sh "docker build -t himimage1:latest ."
+                sh 'docker tag himimage1 himanshudabhade/jenkinsmade:latest'
+                sh 'docker tag himimage1 himanshudabhade/jenkinsmade:$BUILD_NUMBER'
             }
         }
 
-        stage('Push') {
-      steps {
-        sh 'docker push himimage1:latest'
-      }
-    }
+        stage('Publish image to Docker Hub') {
+          
+            steps {
+        withDockerRegistry([ credentialsId: "dockerhub_password", url: "" ]) {
+          sh  'docker push himanshudabhade/jenkinsmade:latest'
+          sh  'docker push himanshudabhade/jenkinsmade:$BUILD_NUMBER' 
+        }
+                  
+          }
+        }
 
     }
 }
