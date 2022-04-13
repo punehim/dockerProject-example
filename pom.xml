@@ -22,12 +22,6 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
         <version>2.3</version>
-        <build>
-    <plugins>
-      <plugin>
-        <groupId>org.sonarsource.scanner.maven</groupId>
-        <artifactId>sonar-maven-plugin</artifactId>
-        <version>3.7.0.1746</version>
         <executions>
           <execution>
             <phase>package</phase>
@@ -39,15 +33,19 @@
                   <artifactId>webapp-runner</artifactId>
                   <version>8.5.11.3</version>
                   <destFileName>webapp-runner.jar</destFileName>
+                  <plugins>
+                   <plugin>
+                   <groupId>org.sonarsource.scanner.maven</groupId>
+                   <artifactId>sonar-maven-plugin</artifactId>
+                   <version>3.7.0.1746</version>
+                   </plugin>  
+                  </plugins> 
                 </artifactItem>
               </artifactItems>
             </configuration>
           </execution>
-        </executions>
-        </plugin>
-      </plugins>
-     </build>
-    </plugin>
-  </plugins>
-</build>
+         </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>
