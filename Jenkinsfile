@@ -3,12 +3,7 @@ pipeline{
     environment {
         PATH = "$PATH:/opt/maven/bin"
     }
-    stages{
-       stage('GetCode'){
-            steps{
-                git 'https://github.com/punehim/dockerrepotest.git'
-            }
-         }        
+    stages{        
        stage('Build'){
             steps{
                 sh 'mvn clean package'
