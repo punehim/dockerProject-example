@@ -16,6 +16,17 @@
     </dependency>
   </dependencies>
   <build>
+  <pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.sonarsource.scanner.maven</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>3.7.0.1746</version>
+      </plugin>
+    </plugins>
+  </pluginManagement>
+</build>
+  <build>
     <finalName>java-tomcat-maven-example</finalName>
     <plugins>
       <plugin>
@@ -33,13 +44,6 @@
                   <artifactId>webapp-runner</artifactId>
                   <version>8.5.11.3</version>
                   <destFileName>webapp-runner.jar</destFileName>
-                  <plugins>
-                   <plugin>
-                   <groupId>org.sonarsource.scanner.maven</groupId>
-                   <artifactId>sonar-maven-plugin</artifactId>
-                   <version>3.7.0.1746</version>
-                   </plugin>  
-                  </plugins> 
                 </artifactItem>
               </artifactItems>
             </configuration>
