@@ -13,10 +13,13 @@ pipeline{
         stage('Scan') {
             steps {
         withSonarQubeEnv(installationName: 'sonarqube') { 
-          sh 'mvn sonar:sonar'
+          // Optionally use a Maven environment you've configured already
+                    withMaven(maven:'Maven 3.5') {
+                        sh 'mvn clean package sonar:sonar'
         }
       }
     }     
+    }
        
     }
 }
