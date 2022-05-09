@@ -1,0 +1,21 @@
+docker info
+docker version
+docker container run -d -p 80:80 --name
+
+ps aux | grep nginx
+
+
+docker container run -d -p 80:80 --name himnginx nginix   ==>> container started
+
+docker container run -d -p 8080:80 --name himwebserver httpd 
+
+docker container run -d -p 3306:3306 --name himsqldb --env MYSQL_RANDOM_ROOT_PASSWORD=yes mysql:latest
+<> to find password  docker container logs himsqldb
+
+docker container inspect <imagename>
+=====================
+If we want to go inside the container
+
+docker container run -it --name himimage nginix /bin/bash
+
+docker container exec -it <Conatiner-ID>
