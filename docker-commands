@@ -19,3 +19,20 @@ If we want to go inside the container
 docker container run -it --name himimage nginix /bin/bash
 
 docker container exec -it <Conatiner-ID>
+
+NETWORKING IN DOCKER
+docker network ls
+
+docker network -f driver=bridge
+docker network ls --formate "{{.ID}}: {{.Driver}}"
+docker network create himnetwork
+ex-
+docker container run -d --name himcont --network himnetwork -p 8000:80 nginix:latest
+
+communication of two container
+
+docker container exec -it image1 ping image2
+===================
+DOCKER fILE
+
+docker build -T IMAGENAME:TAGNAME . 
