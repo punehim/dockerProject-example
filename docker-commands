@@ -1,7 +1,11 @@
 docker info
 docker version
 docker container run -d -p 80:80 --name
+============================
+ADD DOCKER in USER GROUP
 
+sudo usermod -a -G docker $USER
+==============================
 ps aux | grep nginx
 
 
