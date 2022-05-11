@@ -36,3 +36,31 @@ docker container exec -it image1 ping image2
 DOCKER fILE
 
 docker build -T IMAGENAME:TAGNAME . 
+
+========================================
+
+Volumes and Mounts
+
+docker run -d --name himsql -e MYSQL_ALLOW_EMPTY_PASSWORD=True --mount source=mysql-db,destination=/var/lib/mysql mysql:latest
+docker volume ls
+
+Bind-Mounts
+ 
+docker container run -d --name nginxbind --mount type=bind,source=$(pwd),target=/app nginx:latest   
+=========
+Assignment of persist database
+
+docker container run -d --name=mysql-test -e "MY_SQL_ROOT_PASSWORD=mypassword" --mount source=mysql-db,target=my/lib/mysql mysql:8.0
+docker volume ls
+
+to connect database we need to find container IP and put in command
+
+docker volume inspect <ID>
+apt-get install mysql-client
+mysql -u root -pmypassword -h 172.17.0.2 -p 3306
+
+Remove the container and ADD same volume in different container
+
+docker container run -d --name=mysql-test -e "MY_SQL_ROOT_PASSWORD=mypassword" --mount source=mysql-db,target=my/lib/mysql mysql:8.0.15
+
+=========
