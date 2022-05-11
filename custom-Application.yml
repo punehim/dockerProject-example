@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  distro:
+    image: alpine
+    restart: always
+    container_name: Custom_Alpine
+    entrypoint: tail -f /dev/null
+
+  database:
+    image: postgres:latest
+    restart: always
+    container_name: postgres_db
+    ports: 
+      - "5432:5432"
+    volumes:
+      - ../dump:/tmp/  
+
+  web: 
+    image: nginx:latest
+    restart: always
+    container_name: nginx_web
+    ports:
+      - "8080:80"
+    volumes:
+      - .mysite.templet:/etc/nginx/conf.d/mysite.template
+    environment:
+      - NGINX_HOST=sample.com
+      - NGINX_port=80
+    links:
+      database:db
+      distro
+
+  volumes:
+    data: 
+      external: true 
+              

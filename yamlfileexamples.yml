@@ -1,0 +1,18 @@
+version: '3' # Specify the Compose File Syntex version
+
+services: # Service is the name for a "container in production"
+
+   servicename: # Container Service Name
+
+     image: # Optional, specify if build specific
+     command: # Optional, relmand CMD Specified in image
+     environment: # Optional, similar to -e in docker Run Command
+     volumes: # Optional, similar to --mount in docker Run
+
+   servicename2:
+
+
+volumes: # Optional, Mounts a linked path on the host machine that can
+
+
+networks: # Optional, Same as Docker Network
